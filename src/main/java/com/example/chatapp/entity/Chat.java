@@ -1,9 +1,63 @@
 package com.example.chatapp.entity;
 
+import jakarta.persistence.*;
+import java.time.LocalDateTime;
+
+@MappedSuperclass
+public abstract class Chat {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    protected Long id;
+
+    @Column(nullable = false)
+    protected String chatId;
+
+    @Column(nullable = false)
+    protected int status;
+
+    @Column(nullable = false)
+    private LocalDateTime creationDate;
+
+    public Chat() {
+        this.creationDate = LocalDateTime.now();
+    }
+
+    // Getters and Setters
+    public Long getId() {
+        return id;
+    }
+
+    public String getChatId() {
+        return chatId;
+    }
+
+    public void setChatId(String chatId) {
+        this.chatId = chatId;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public LocalDateTime getCreationDate() {
+        return creationDate;
+    }
+
+    public void setCreationDate(LocalDateTime creationDate) {
+        this.creationDate = creationDate;
+    }
+}
+
+
+/*package com.example.chatapp.entity;
+
 
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
 
 @Entity
@@ -25,6 +79,7 @@ public class Chat {
     @JoinColumn(name = "receiver_id", nullable = false)
     private User receiver;
 
+
     @Column(nullable = false)
     private String timestamp;
 
@@ -37,6 +92,7 @@ public class Chat {
         this.sender = sender;
         this.receiver = receiver;
         this.timestamp = timestamp;
+
     }
 
     // --- Getters and Setters ---
@@ -81,3 +137,4 @@ public class Chat {
         this.timestamp = timestamp;
     }
 }
+*/
